@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Index</title>
+   
+    <script src="Scripts/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <!--post-->
+
+    <input type="text" name="Id">
+    <input type="text" name="Name">
+    <input type="text" name="Age">
+    <input type="text" name="Salary">
+    <input type="text" name="DeptId">
+    <input type="button" onclick="FunAdd()" value="Add" />
+    <input type="button" onclick="FunUpdate()" value="Update" />
+    <script>
+
+        /* get*/
+        $(function () {
+            $.ajax(
+                {
+                    method: "Get",
+                    url: "http://localhost:59383/api/employees",
+                    success: function (data) {
+                        alert(JSON.stringify(data))
+                    },
+                    error: function (error) {
+                        alert("Error")
+                        alert(error.responseText)
+                    }
+                }
+            );
+        }
+        )
+        /*Add*/
+        function FunAdd() {
+
+            var emp = {
+                Id: $("[name='Id']").val,
+                Name: $("[name='Name']").val,
+                Age: $("[name='Age']").val,
+                Salary: $("[name='Salary']").val,
+                DeptId: $("[name='DeptId']").val,
+            };
+            $.ajax(
+                {
+                    method: "Post",
+                    url: "http://localhost:59383/api/employees",
+                    dataType: "Appliation/Json",
+                    data: emp,
+                    success: function (data) {
+                        alert("done");
+                    },
+                    error: function (error) {
+                        alert("Error")
+                        alert(error.responseText)
+                    }
+                }
+            );
+        }
+
+      /*  Update*/
+
+        function FunAdd() {
+            var emp = {
+                Id: $("[name='Id']").val,
+                Name: $("[name='Name']").val,
+                Age: $("[name='Age']").val,
+                Salary: $("[name='Salary']").val,
+                DeptId: $("[name='DeptId']").val,
+            };
+            $.ajax(
+                {
+                    method: "Put",
+                    url: "http://localhost:59383/api/employees/" + $("[name='Id']").val(),
+                    dataType: "Appliation/Json",
+                    data:emp,
+                    success: function (data) {
+                        alert("done");
+                    },
+                    error: function (error) {
+                        alert("Error")
+                        alert(error.responseText)
+                    }
+        }
+    </script>
+</body>
+</html>
